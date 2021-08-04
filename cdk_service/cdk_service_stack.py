@@ -18,7 +18,7 @@ class CdkServiceStack(core.Stack):
         self.vpc, self.pri_sub, self.pub_sub = self.create_vpc()
 
         # create securitygroup service
-        self.bastion_sg, self.solr_sg, self.rds_sg = self.create_securitygroup()
+        self.bastion_sg, self.rds_sg = self.create_securitygroup()
 
         # create bastion ec2
         self.create_ec2()
@@ -71,28 +71,14 @@ class CdkServiceStack(core.Stack):
         bastion_securitygroup.add_ingress_rule(ec2.Peer.ipv4(CIDRS['MYIP']), ec2.Port.tcp(22))
         bastion_securitygroup.add_ingress_rule(ec2.Peer.ipv4('10.0.0.0/8'), ec2.Port.tcp(22))
 
-        solr_securitygroup = ec2.SecurityGroup(self, 'sg-solrinternal', vpc=self.vpc,
-            security_group_name='solrinternal',
-            description='Security group for EC2 Solr'
-        )
-        solr_securitygroup.add_ingress_rule(ec2.Peer.ipv4('10.0.0.0/8'), ec2.Port.tcp(22))
-        solr_securitygroup.add_ingress_rule(ec2.Peer.ipv4('10.0.0.0/8'), ec2.Port.tcp(80))
-        solr_securitygroup.add_ingress_rule(ec2.Peer.ipv4('10.0.0.0/8'), ec2.Port.tcp(9100))
-
         rds_securitygroup = ec2.SecurityGroup(self, 'sg-rds', vpc=self.vpc,
             security_group_name='rds',
             description='Security group for RDS'
         )
         rds_securitygroup.add_ingress_rule(ec2.Peer.ipv4('0.0.0.0/0'), ec2.Port.tcp(3306))
 
-        tensorflow_security_group = ec2.SecurityGroup(self, 'sg-tensorflow', vpc=self.vpc, 
-            security_group_name='tensorflow', 
-            description='Security group for tensorflow ECS'
-        )
-        tensorflow_security_group.add_ingress_rule(ec2.Peer.ipv4('10.0.0.0/8'), ec2.Port.tcp(8500))
-        tensorflow_security_group.add_ingress_rule(ec2.Peer.ipv4('10.0.0.0/8'), ec2.Port.tcp(8501))
 
-        return bastion_securitygroup, solr_securitygroup, rds_securitygroup
+        return bastion_securitygroup, rds_securitygroup
 
     def create_ec2(self):
         bastion = ec2.Instance(self, 'bastion', **{
