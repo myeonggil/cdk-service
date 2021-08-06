@@ -71,3 +71,19 @@ aws configure --profile {name}
 ```bash
 cdk diff --profile {name}
 ```
+
+# workflow
+## 1. app.py
+```text
+cdk가 처음 실행되는 파일로 시작할 스택 정보를 등록
+```
+
+```python
+env_info = core.Environment(account='#', region='ap-northeast-2') # AWS account 정보와 region
+
+app = core.App()
+CdkServiceStack(app, "cdkService", env=env_info) # "cdkService"라는 이름의 스택을 생성
+
+app.synth() # cdk.out에 생성된 template과 sync를 비교
+
+```
