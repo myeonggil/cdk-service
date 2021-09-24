@@ -438,8 +438,8 @@
         ],
         "SecurityGroupIngress": [
           {
-            "CidrIp": "27.35.23.221/32",
-            "Description": "from 27.35.23.221/32:22",
+            "CidrIp": "110.35.191.72/32",
+            "Description": "from 110.35.191.72/32:22",
             "FromPort": 22,
             "IpProtocol": "tcp",
             "ToPort": 22
@@ -458,49 +458,6 @@
       },
       "Metadata": {
         "aws:cdk:path": "cdkService/sg-bastion/Resource"
-      }
-    },
-    "sgsolrinternal9E40D901": {
-      "Type": "AWS::EC2::SecurityGroup",
-      "Properties": {
-        "GroupDescription": "Security group for EC2 Solr",
-        "GroupName": "solrinternal",
-        "SecurityGroupEgress": [
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1"
-          }
-        ],
-        "SecurityGroupIngress": [
-          {
-            "CidrIp": "10.0.0.0/8",
-            "Description": "from 10.0.0.0/8:22",
-            "FromPort": 22,
-            "IpProtocol": "tcp",
-            "ToPort": 22
-          },
-          {
-            "CidrIp": "10.0.0.0/8",
-            "Description": "from 10.0.0.0/8:80",
-            "FromPort": 80,
-            "IpProtocol": "tcp",
-            "ToPort": 80
-          },
-          {
-            "CidrIp": "10.0.0.0/8",
-            "Description": "from 10.0.0.0/8:9100",
-            "FromPort": 9100,
-            "IpProtocol": "tcp",
-            "ToPort": 9100
-          }
-        ],
-        "VpcId": {
-          "Ref": "vpcA2121C38"
-        }
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkService/sg-solrinternal/Resource"
       }
     },
     "sgrds32A84C28": {
@@ -530,42 +487,6 @@
       },
       "Metadata": {
         "aws:cdk:path": "cdkService/sg-rds/Resource"
-      }
-    },
-    "sgtensorflow630D2F2C": {
-      "Type": "AWS::EC2::SecurityGroup",
-      "Properties": {
-        "GroupDescription": "Security group for tensorflow ECS",
-        "GroupName": "tensorflow",
-        "SecurityGroupEgress": [
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1"
-          }
-        ],
-        "SecurityGroupIngress": [
-          {
-            "CidrIp": "10.0.0.0/8",
-            "Description": "from 10.0.0.0/8:8500",
-            "FromPort": 8500,
-            "IpProtocol": "tcp",
-            "ToPort": 8500
-          },
-          {
-            "CidrIp": "10.0.0.0/8",
-            "Description": "from 10.0.0.0/8:8501",
-            "FromPort": 8501,
-            "IpProtocol": "tcp",
-            "ToPort": 8501
-          }
-        ],
-        "VpcId": {
-          "Ref": "vpcA2121C38"
-        }
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkService/sg-tensorflow/Resource"
       }
     },
     "bastionInstanceRole7BAD4654": {

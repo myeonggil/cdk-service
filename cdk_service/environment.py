@@ -1,8 +1,9 @@
 import requests, json
 
 
-data = requests.get("http://ip.jsontest.com/").json()
-MY_IP = data['ip'] + '/32'
+# data = requests.get("http://ip.jsontest.com/").json()
+# MY_IP = data['ip'] + '/32'
+MY_IP = '110.35.191.72/32'
 
 KEY_NAME = 'mgju-ap-northeast-2-210718'
 BASTION_AMI_NAME = ''

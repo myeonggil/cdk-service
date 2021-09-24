@@ -35,9 +35,12 @@ class CdkServiceStack(core.Stack):
     def create_vpc(self):
         pri_subnetids = []
         pub_subnetids = []
-        vpc = ec2.Vpc(self, 'vpc', cidr=CIDR_BLOCK,
+        vpc = ec2.Vpc(self, 'vpc', 
+                      cidr=CIDR_BLOCK,
                       max_azs=2,
-                      nat_gateways=2,
+                      nat_gateways=2, 
+                      enable_dns_hostnames=True, 
+                      enable_dns_support=True, 
                       subnet_configuration=[
                         {
                             'subnetType': ec2.SubnetType.PRIVATE,
