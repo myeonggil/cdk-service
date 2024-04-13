@@ -1,7 +1,7 @@
 
 # Welcome to your CDK Python project!
 
-This is a blank project for Python development with CDK.
+This is a blank project for CDK development with Python.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
@@ -56,34 +56,3 @@ command.
  * `cdk docs`        open CDK documentation
 
 Enjoy!
-
-
-# 간단한 팁
-## 1. brew를 통해 cdk 설치
-```bash
-brew install aws-cdk
-```
-## 2. CDK가 인식할 수 있도록 profile 이름을 명시
-```bash
-aws configure --profile {name}
-```
-## 3. 명확한 profile에서 작업 수행할 수 있도록 profile 명시
-```bash
-cdk diff --profile {name}
-```
-
-# workflow
-## 1. app.py
-```text
-cdk가 처음 실행되는 파일로 시작할 스택 정보를 등록
-```
-
-```python
-env_info = core.Environment(account='#', region='ap-northeast-2') # AWS account 정보와 region
-
-app = core.App()
-CdkServiceStack(app, "cdkService", env=env_info) # "cdkService"라는 이름의 스택을 생성
-
-app.synth() # cdk.out에 생성된 template과 sync를 비교
-
-```

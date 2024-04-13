@@ -1,5 +1,11 @@
+*.swp
+package-lock.json
+__pycache__
+.pytest_cache
 .venv
-source.bat
-vendor
-.id
-aws_account.py
+*.egg-info
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+.env
