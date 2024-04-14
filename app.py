@@ -5,6 +5,8 @@ import aws_cdk as cdk
 
 from cdk_service.cdk_service_stack import CdkServiceStack
 from cdk_service.network.vpc import CdkNetworkVPCStack
+from cdk_service.sg.security_group import CdkSecurityGroupStack
+from cdk_service.computing.ec2 import CdkEC2Stack
 from dotenv import dotenv_values
 
 config = dotenv_values(".env")
@@ -28,7 +30,26 @@ app = cdk.App()
 #     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
 # )
 
-CdkNetworkVPCStack(app, "vpc",
+network = CdkNetworkVPCStack(app, "netowrk",
+    env=cdk.Environment(
+        account=config["account"],
+        region=config["region"]
+    )
+)
+sg = CdkSecurityGroupStack(
+    app,
+    "sg",
+    network.vpc,
+    env=cdk.Environment(
+        account=config["account"],
+        region=config["region"]
+    )
+)
+computing = CdkEC2Stack(
+    app,
+    "ec2",
+    network.vpc,
+    sg.security_group,
     env=cdk.Environment(
         account=config["account"],
         region=config["region"]
